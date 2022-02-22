@@ -1,8 +1,14 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_sample/main_model.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+      // options: DefaultFirebaseOptions.currentPlatform,
+      );
+
   runApp(MyApp());
 }
 
@@ -11,16 +17,25 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'ToTo アプリ Demo',
-      // 16:23 あたり
       home: ChangeNotifierProvider<MainModel>(
         create: (_) => MainModel()..getTodoList(),
         child: Scaffold(
           appBar: AppBar(
             title: const Text('ToDo アプリ'),
           ),
-          body: const Text(
-            'You have pushed the button this many times:',
-          ),
+          // 17:38 あたり
+          body: Consumer<MainModel>(builder: (context, model, child) {
+            final todoList = model.todoList;
+            return ListView(
+              children: todoList
+                  .map(
+                    (todo) => ListTile(
+                      title: Text(todo.title),
+                    ),
+                  )
+                  .toList(),
+            );
+          }),
           floatingActionButton: FloatingActionButton(
             onPressed: () {},
             tooltip: 'Increment',

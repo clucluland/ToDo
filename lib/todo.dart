@@ -6,7 +6,9 @@ class Todo {
     // title = doc.data()!['title'];
     // createdAt = doc.data()!['createdAt'];
     title = doc['title'];
-    createdAt = doc['createdAt'];
+
+    final Timestamp timestamp = doc['createdAt'];
+    createdAt = timestamp.toDate();
   }
 
 // 以下のエラーが出たため、late を付与してみた。
