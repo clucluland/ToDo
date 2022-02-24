@@ -23,7 +23,6 @@ class MyApp extends StatelessWidget {
           appBar: AppBar(
             title: const Text('ToDo アプリ'),
           ),
-          // 17:38 あたり
           body: Consumer<MainModel>(builder: (context, model, child) {
             final todoList = model.todoList;
             return ListView(
