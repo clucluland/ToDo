@@ -10,14 +10,28 @@ class AddPage extends StatelessWidget {
       create: (_) => AddModel(),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('ToDo アプリ'),
+          title: const Text('ToDo 追加'),
         ),
         body: Consumer<AddModel>(builder: (context, model, child) {
-          return Column(
-            children: [
-              const TextField(),
-              ElevatedButton(onPressed: () {}, child: child),
-            ],
+          return Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              children: [
+                const TextField(
+                  decoration: InputDecoration(
+                    labelText: 'aaa',
+                    hintText: 'bbb',
+                  ),
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                ElevatedButton(
+                  onPressed: () {},
+                  child: const Text('追加'),
+                ),
+              ],
+            ),
           );
         }),
       ),
