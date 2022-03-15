@@ -17,17 +17,24 @@ class AddPage extends StatelessWidget {
             padding: const EdgeInsets.all(16),
             child: Column(
               children: [
-                const TextField(
-                  decoration: InputDecoration(
-                    labelText: 'aaa',
-                    hintText: 'bbb',
+                TextField(
+                  decoration: const InputDecoration(
+                    labelText: '追加ToDo',
+                    hintText: '具体的に記載',
                   ),
+                  onChanged: (text) {
+                    model.todoText = text;
+                  },
                 ),
                 const SizedBox(
                   height: 16,
                 ),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    // ignore: Firestoreに値を追加
+                    model.add();
+                    Navigator.pop(context);
+                  },
                   child: const Text('追加'),
                 ),
               ],
