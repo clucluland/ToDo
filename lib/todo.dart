@@ -16,4 +16,5 @@ class Todo {
 // Try adding an initializer expression, or add a field initializer in this constructor, or mark it 'late'.
   late String title;
   late DateTime createdAt;
+  late bool isDone = false;
 }

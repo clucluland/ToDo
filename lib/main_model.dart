@@ -25,4 +25,8 @@ class MainModel extends ChangeNotifier {
       notifyListeners();
     });
   }
+
+  void reload() {
+    notifyListeners();
+  }
 }

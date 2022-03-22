@@ -31,14 +31,33 @@ class MainPage extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: const Text('ToDo アプリ'),
+          actions: [
+            TextButton(
+              onPressed: () {},
+              child: const Text(
+                '完了',
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ],
         ),
         body: Consumer<MainModel>(builder: (context, model, child) {
           final todoList = model.todoList;
           return ListView(
             children: todoList
                 .map(
-                  (todo) => ListTile(
+                  (todo) => CheckboxListTile(
                     title: Text(todo.title),
+                    value: todo.isDone,
+                    onChanged: (bool? value) {
+                      todo.isDone = !todo.isDone;
+                      // ↓ リロードするだけのものを呼ぶと警告受ける
+                      // model.notifyListeners();
+                      // そのため、リロードのプロシージャを用意
+                      model.reload();
+                    },
                   ),
                 )
                 .toList(),
